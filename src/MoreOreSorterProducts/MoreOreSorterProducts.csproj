@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net480</TargetFramework>
+		<Configurations>Debug;Release</Configurations>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<WarningLevel>9999</WarningLevel>
+		<LangVersion>10.0</LangVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>portable</DebugType>
+		<DefineConstants>DEBUG</DefineConstants>
+		<OutputPath>bin\Debug\</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>portable</DebugType>
+		<DefineConstants></DefineConstants>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\Release\</OutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Lib.Harmony" Version="2.3.6" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Mafi">
+			<HintPath>E:\SteamLibrary\steamapps\common\Captain of Industry\Captain of Industry_Data\Managed\Mafi.dll</HintPath>
+		</Reference>
+		<Reference Include="Mafi.Base">
+			<HintPath>E:\SteamLibrary\steamapps\common\Captain of Industry\Captain of Industry_Data\Managed\Mafi.Base.dll</HintPath>
+		</Reference>
+		<Reference Include="Mafi.Core">
+			<HintPath>E:\SteamLibrary\steamapps\common\Captain of Industry\Captain of Industry_Data\Managed\Mafi.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="Mafi.ModsAuthoringSupport">
+			<HintPath>E:\SteamLibrary\steamapps\common\Captain of Industry\Captain of Industry_Data\Managed\Mafi.ModsAuthoringSupport.dll</HintPath>
+		</Reference>
+		<Reference Include="Mafi.Unity">
+			<HintPath>E:\SteamLibrary\steamapps\common\Captain of Industry\Captain of Industry_Data\Managed\Mafi.Unity.dll</HintPath>
+		</Reference>
+		<Reference Include="Mafi.UnityCore">
+			<HintPath>E:\SteamLibrary\steamapps\common\Captain of Industry\Captain of Industry_Data\Managed\Mafi.UnityCore.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+</Project>

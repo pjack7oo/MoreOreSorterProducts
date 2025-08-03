@@ -113,8 +113,17 @@ namespace ExampleMod
     {
         public static MethodBase TargetMethod()
         {
-            Type innerClass = AccessTools.Inner(AccessTools.TypeByName("Mafi.Unity.Ui.Inspectors.OreSortingPlantInspector"), "<>c__DisplayClass0_0");
-            return AccessTools.Method(innerClass, "<.ctor>b__16");
+            Type oreSortingPlantInspector = AccessTools.TypeByName("Mafi.Unity.Ui.Inspectors.OreSortingPlantInspector");
+            Type innerClass = AccessTools.FirstInner(oreSortingPlantInspector, (inner) => inner.FullName.Contains("DisplayClass"));
+            //Type innerClass = AccessTools.Inner(AccessTools.TypeByName("Mafi.Unity.Ui.Inspectors.OreSortingPlantInspector"), "<>c__DisplayClass0_0");
+
+            //TODO retrieve the name instead of having it hard coded
+
+            //AccessTools.FirstInner(innerClass, (inner) =>
+            //{
+
+            //});
+            return AccessTools.Method(innerClass, "<.ctor>b__18");
         }
 
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)

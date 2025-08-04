@@ -26,8 +26,6 @@ public sealed class MoreOreSorterProducts : DataOnlyMod {
 		Log.Info("MoreOreSorterProducts: constructed");
         var harmony = new Harmony("coi-harmony");
         harmony.PatchAll();
-        //var harmony = new Harmony("coi-harmony");
-        //      harmony.PatchAll();
     }
 
     //public void Initialize(DependencyResolver resolver, bool gameWasLoaded)

@@ -117,8 +117,6 @@ namespace ExampleMod
             Type innerClass = AccessTools.FirstInner(oreSortingPlantInspector, (inner) => inner.FullName.Contains("DisplayClass"));
             //Type innerClass = AccessTools.Inner(AccessTools.TypeByName("Mafi.Unity.Ui.Inspectors.OreSortingPlantInspector"), "<>c__DisplayClass0_0");
 
-            //TODO retrieve the name instead of having it hard coded
-
             return AccessTools.FirstMethod(innerClass, (method) =>
             {
                 if (method.IsAssembly)
@@ -127,10 +125,10 @@ namespace ExampleMod
 
                     ParameterInfo[] parameters = method.GetParameters();
                     foreach (var parameter in parameters)
-                    {
-                        Log.Info("Parameter:" + parameter.Name+ "ParameterInfo:"+parameter.ParameterType.FullName);
-                        
-                    }
+                    //{
+                    //    Log.Info("Parameter:" + parameter.Name + "ParameterInfo:" + parameter.ParameterType.FullName);
+
+                    //}
 
                     if (parameters.Length == 2)
                     {

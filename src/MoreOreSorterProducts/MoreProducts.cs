@@ -119,11 +119,32 @@ namespace ExampleMod
 
             //TODO retrieve the name instead of having it hard coded
 
-            //AccessTools.FirstInner(innerClass, (inner) =>
-            //{
+            return AccessTools.FirstMethod(innerClass, (method) =>
+            {
+                if (method.IsAssembly)
+                {
+                    Log.Info("MethodName:" + method.Name);
 
-            //});
-            return AccessTools.Method(innerClass, "<.ctor>b__18");
+                    ParameterInfo[] parameters = method.GetParameters();
+                    foreach (var parameter in parameters)
+                    {
+                        Log.Info("Parameter:" + parameter.Name+ "ParameterInfo:"+parameter.ParameterType.FullName);
+                        
+                    }
+
+                    if (parameters.Length == 2)
+                    {
+                        if (parameters[0].ParameterType.FullName.Contains("IProductBuffer") &&
+                            parameters[1].ParameterType.FullName.Contains("OreSortingPlant"))
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            });
+            //return AccessTools.Method(innerClass, "<.ctor>b__18");
         }
 
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)

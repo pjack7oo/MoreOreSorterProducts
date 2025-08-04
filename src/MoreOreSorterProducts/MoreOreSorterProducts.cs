@@ -24,12 +24,25 @@ public sealed class MoreOreSorterProducts : DataOnlyMod {
 		// You can use Log class for logging. These will be written to the log file
 		// and can be also displayed in the in-game console with command `also_log_to_console`.
 		Log.Info("MoreOreSorterProducts: constructed");
-		var harmony = new Harmony("coi-harmony");
+        var harmony = new Harmony("coi-harmony");
         harmony.PatchAll();
-	}
+        //var harmony = new Harmony("coi-harmony");
+        //      harmony.PatchAll();
+    }
+
+    //public void Initialize(DependencyResolver resolver, bool gameWasLoaded)
+    //{
+    //    if (gameWasLoaded)
+    //    {
+    //        var harmony = new Harmony("coi-harmony");
+    //        harmony.PatchAll();
+    //    }
+    //}
 
 
-	public override void RegisterPrototypes(ProtoRegistrator registrator) {
+
+
+    public override void RegisterPrototypes(ProtoRegistrator registrator) {
 
 	}
 

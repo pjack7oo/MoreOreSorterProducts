@@ -10,9 +10,14 @@ using HarmonyLib;
 using Mafi.Core.Buildings.OreSorting;
 
 using System.Reflection.Emit;
+using Mafi.Localization;
 
 namespace ExampleMod
 {
+    public static class Constants
+    {
+        public const int MaxProductCount = 24;
+    }
     [HarmonyPatch(typeof(VehicleCargo), nameof(VehicleCargo.CanAdd))]
     public class MyPatch
     {
@@ -26,10 +31,11 @@ namespace ExampleMod
 
         static void Postfix(VehicleCargo __instance, ProductProto product, ref bool __result)
         {
+            
             var this__m_data = __m_data.GetValue(__instance);
             __result = this__m_data.Count == 0
                 || __instance.HasProduct(product)
-                || (this__m_data.Count != 20 && this__m_data[0].Key.IsMixable && product.IsMixable);
+                || (this__m_data.Count != Constants.MaxProductCount && this__m_data[0].Key.IsMixable && product.IsMixable);
         }
     }
 
@@ -64,7 +70,7 @@ namespace ExampleMod
                 return;
             }
 
-            if (m_minedProducts.Count >= 20)
+            if (m_minedProducts.Count >= Constants.MaxProductCount)
             {
                 __result = PartialQuantity.Zero;
                 return;
@@ -93,12 +99,12 @@ namespace ExampleMod
             {
                 //Log.Info("Code:" + codes[i].opcode + "\nOperand:" + codes[i].operand);
 
-                if (codes[i].opcode == OpCodes.Ldc_I4_8)
+                if (codes[i].opcode == OpCodes.Ldc_I4_S && (int)codes[i].operand == 16)
                 {
                     //Log.Info("Found code:" + i);
                    
-                    codes[i].opcode = OpCodes.Ldc_I4_S;
-                    codes[i].operand = 20;
+                    //codes[i].opcode = OpCodes.Ldc_I4_S;
+                    codes[i].operand = Constants.MaxProductCount;
 
                 }
             }
@@ -152,13 +158,12 @@ namespace ExampleMod
 
             for (var i = 0; i < codes.Count; i++)
             {
-
-                if (codes[i].opcode == OpCodes.Ldc_I4_8)
+                if (codes[i].opcode == OpCodes.Ldc_I4_S && (int)codes[i].operand==16)
                 {
                     //Log.Info("Found code:" + i);
                     //index = i;
-                    codes[i].opcode = OpCodes.Ldc_I4_S;
-                    codes[i].operand = 20;
+                    //codes[i].opcode = OpCodes.Ldc_I4_S;
+                    codes[i].operand = Constants.MaxProductCount;
 
                 }
             }

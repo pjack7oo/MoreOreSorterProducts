@@ -11,6 +11,7 @@ using Mafi.Core.Buildings.OreSorting;
 
 using System.Reflection.Emit;
 using Mafi.Localization;
+using static Mafi.Unity.Assets.Unity.Generated.Icons;
 
 namespace ExampleMod
 {
@@ -21,12 +22,14 @@ namespace ExampleMod
     [HarmonyPatch(typeof(VehicleCargo), nameof(VehicleCargo.CanAdd))]
     public class MyPatch
     {
+
         // private readonly Lyst<KeyValuePair<ProductProto, Quantity>> m_data;
         static TypedFieldInfo<VehicleCargo, Lyst<KeyValuePair<ProductProto, Quantity>>> __m_data;
 
         static MyPatch()
         {
             __m_data = new("m_data");
+
         }
 
         static void Postfix(VehicleCargo __instance, ProductProto product, ref bool __result)
@@ -97,9 +100,9 @@ namespace ExampleMod
 
             for (var i = 0; i < codes.Count; i++)
             {
-                //Log.Info("Code:" + codes[i].opcode + "\nOperand:" + codes[i].operand);
+                Log.Info("Code:" + codes[i].opcode + "\nOperand:" + codes[i].operand);
 
-                if (codes[i].opcode == OpCodes.Ldc_I4_S && (int)codes[i].operand == 16)
+                if (codes[i].opcode == OpCodes.Ldc_I4_S)
                 {
                     //Log.Info("Found code:" + i);
                    
@@ -158,9 +161,14 @@ namespace ExampleMod
 
             for (var i = 0; i < codes.Count; i++)
             {
-                if (codes[i].opcode == OpCodes.Ldc_I4_S && (int)codes[i].operand==16)
+                Log.Info("xCode:" + codes[i].opcode + "\nOperand:" + codes[i].operand);
+                Log.Info("equals:");
+
+                if (codes[i].opcode == OpCodes.Ldc_I4_S)
                 {
-                    //Log.Info("Found code:" + i);
+                    Log.Info("Found code:" + codes[i].opcode);
+                    Log.Info("Found operand:" + codes[i].operand);
+
                     //index = i;
                     //codes[i].opcode = OpCodes.Ldc_I4_S;
                     codes[i].operand = Constants.MaxProductCount;
